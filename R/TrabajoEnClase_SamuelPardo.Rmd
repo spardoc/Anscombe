@@ -1,0 +1,64 @@
+---
+title: "Trabajo en clase"
+author: "Samuel Pardo"
+date: "2025-04-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+# Install required packages if they are missing
+packages <- c("ggplot2", "tidyverse", "datasauRus", "dplyr")
+install_if_missing <- function(pkg) {
+  if (!requireNamespace(pkg, quietly = TRUE)) install.packages(pkg)
+}
+lapply(packages, install_if_missing)
+
+# Load libraries
+library(ggplot2)
+library(tidyverse)  # Includes dplyr
+library(datasauRus)
+library(dplyr)
+
+print("Inicio del código")
+
+# Summarize dataset
+summary_stats <- datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarize(
+    mean_x = mean(x),
+    mean_y = mean(y),
+    std_dev_x = sd(x),
+    std_dev_y = sd(y),
+    corr_x_y = cor(x, y)
+  )
+
+# Print summary stats
+print(summary_stats)
+
+# Plot data
+ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset)) +
+  geom_point() +
+  theme_void() +
+  theme(legend.position = "none") +
+  facet_wrap(~dataset, ncol = 3)
+
+# Filtrar solo el dataset "wide_lines"
+wide_lines_data <- datasaurus_dozen %>% filter(dataset == "wide_lines")
+
+# Graficar con línea de regresión
+ggplot(wide_lines_data, aes(x = x, y = y)) +
+  geom_point(color = "deeppink", alpha = 0.8) +
+  geom_smooth(method = "lm", color = "black", se = FALSE) +
+  theme_minimal()
+
+```
