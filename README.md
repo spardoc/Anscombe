@@ -30,13 +30,13 @@ En esta actividad se trabajo con el dataset datasaurus_dozen, un conjunto que pe
 
 ![Datasaurus y WideLines](images/Datasaurus.png)
 
-Luego se realizó la filtración específicamente el subconjunto wide_lines, que se caracteriza por tener una dispersión horizontal amplia. Luego:
+Luego se realizó la filtración específicamente el subconjunto wide_lines, dino y x_shape. Luego:
 - Visualización de los puntos con ggplot2.
 - Aplicación de un modelo de regresión lineal (lm) para observar la relación entre las variables x / y.
 - Línea de regresión al gráfico, lo cual permite visualizar la tendencia lineal entre ambas variables.
 
 Esto ilustra cómo, incluso con un patrón de dispersión no evidente a simple vista, el modelo puede encontrar y representar relaciones lineales.
-![Datasaurus y WideLines](images/Widelines.png)
+![Regresión en datasets: wide-lines, dino y x_shape](images/datasets.png)
 
 ## Actividad 2
 
