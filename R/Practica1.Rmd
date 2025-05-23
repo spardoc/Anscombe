@@ -1,0 +1,58 @@
+---
+title: "Practica1"
+author: "Samuel Pardo"
+date: "2025-05-23"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+
+En este documento analizamos tres subconjuntos del conjunto datasaurus_dozen del paquete datasauRus, aplicando una regresión lineal simple.
+
+## Cargar librerías
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(datasauRus)
+library(gridExtra)
+
+```
+
+## Función para graficar regresión lineal
+
+```{r}
+graficar_con_regresion <- function(data, titulo, color_puntos = "steelblue") {
+  ggplot(data, aes(x = x, y = y)) +
+    geom_point(color = color_puntos, alpha = 0.8) +
+    geom_smooth(method = "lm", color = "black", se = FALSE) +
+    theme_minimal() +
+    ggtitle(titulo)
+}
+
+```
+
+## Graficar los subconjuntos: wide-lines, dino y x_shape
+
+```{r}
+# Dataset wide_lines
+wide_lines_data <- datasaurus_dozen %>% filter(dataset == "wide_lines")
+plot_wide <- graficar_con_regresion(wide_lines_data, "Regresión lineal - wide_lines", "deeppink")
+
+# Dataset dino
+dino_data <- datasaurus_dozen %>% filter(dataset == "dino")
+plot_dino <- graficar_con_regresion(dino_data, "Regresión lineal - dino", "mediumblue")
+
+# Dataset x_shape
+x_shape_data <- datasaurus_dozen %>% filter(dataset == "x_shape")
+plot_xshape <- graficar_con_regresion(x_shape_data, "Regresión lineal - x_shape", "seagreen")
+
+# Mostrar los 3 juntos
+print(gridExtra::grid.arrange(plot_wide, plot_dino, plot_xshape, ncol = 2))
+
+```
+
